@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:keybit/widgets/input_decoration.dart';
 import 'package:lottie/lottie.dart';
 
-class RecoverIdScreen extends StatelessWidget {
-  const RecoverIdScreen({super.key});
+class Recoverpassword extends StatelessWidget {
+  const Recoverpassword({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class RecoverIdScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 30),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: const Color(0xFFffffff),
+              color: const Color(0xFF4B227A),
               borderRadius: BorderRadius.circular(15),
               boxShadow: const [
                 BoxShadow(
@@ -73,10 +73,10 @@ class RecoverIdScreen extends StatelessWidget {
                         keyboardType: TextInputType.text,
                         autocorrect: false,
                         decoration: InputDecorations.inputDecoration(
-                          hintText: 'XXX-XXXXXX-XXXXA',
-                          labelText: 'Cédula',
+                          hintText: '',
+                          labelText: 'Usuario',
                           icono: const Icon(
-                            Icons.assignment,
+                            Icons.person,
                             color: Color(0xFF416f9a), // Color secundario
                           ),
                         ),
@@ -98,8 +98,8 @@ class RecoverIdScreen extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         autocorrect: false,
                         decoration: InputDecorations.inputDecoration(
-                          hintText: '1234-5678',
-                          labelText: 'Teléfono',
+                          hintText: 'usuario@gmail.com',
+                          labelText: 'Correo',
                           icono: const Icon(
                             Icons.phone,
                             color: Color(0xFF416f9a), // Color secundario
@@ -171,8 +171,8 @@ class RecoverIdScreen extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color(0xFFffffff),
-            Color(0xFFd7e2f1),
+            Color(0xFFEAE4F5),
+            Color(0xFFCAAAF3),
             
           ],
           begin: Alignment.topCenter,
