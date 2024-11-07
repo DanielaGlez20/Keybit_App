@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:keybit/Screens/exercises_screen.dart';
-import 'package:keybit/Screens/instant_feedback_screen.dart';
-import 'package:keybit/Screens/lessons_screen.dart';
+import 'package:keybit/Screens/chatbot.dart';
+import 'package:keybit/Screens/interactive_lessons_screen.dart';
 import 'package:keybit/Screens/minigames_screen.dart';
-import 'package:keybit/Screens/profile_screen.dart';
+import 'package:keybit/Screens/perfil.dart';
 import 'package:keybit/Screens/real_time_assessments_screen.dart';
 import 'package:keybit/Screens/settings_screen.dart';
 
@@ -118,7 +118,7 @@ class _HomeKeybitState extends State<HomeKeybit> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const LessonsScreen(),
+                                    builder: (context) => const InteractiveLessonsScreen(),
                                   ),
                                 );
                                 break;
@@ -197,7 +197,7 @@ class _HomeKeybitState extends State<HomeKeybit> {
               ),
             )
           : _intpage == 1
-              ? const ProfileScreen()
+              ? const PerfilScreen()
               : const SettingsScreen(),
     );
   }

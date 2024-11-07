@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class PerfilMedicoScreen extends StatefulWidget {
-  const PerfilMedicoScreen({Key? key}) : super(key: key);
+class PerfilScreen extends StatefulWidget {
+  const PerfilScreen({Key? key}) : super(key: key);
 
   @override
-  _PerfilMedicoScreenState createState() => _PerfilMedicoScreenState();
+  _PerfilScreenState createState() => _PerfilScreenState();
 }
 
-class _PerfilMedicoScreenState extends State<PerfilMedicoScreen> {
+class _PerfilScreenState extends State<PerfilScreen> {
   XFile? _image;
 
   Future<void> _pickImage() async {
