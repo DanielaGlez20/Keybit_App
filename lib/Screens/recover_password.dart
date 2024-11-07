@@ -22,7 +22,7 @@ class Recoverpassword extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 240),
+          const SizedBox(height: 340),
           Container(
             padding: const EdgeInsets.all(20),
             margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -45,17 +45,19 @@ class Recoverpassword extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUnfocus,
                   child: Column(
                     children: [
+                      // Campo Nombre Completo
                       TextFormField(
                         keyboardType: TextInputType.name,
                         autocorrect: false,
                         decoration: InputDecorations.inputDecoration(
-                          hintText: 'Escribe tu nombre completo',
+                          hintText: '',
                           labelText: 'Nombre Completo',
                           icono: const Icon(
                             Icons.person,
-                            color: Color(0xFF416f9a), // Color principal
+                            color: Color(0xFFEAE4F5), // Color principal
                           ),
                         ),
+                        style: const TextStyle(color: Colors.white), // Estilo de texto blanco
                         validator: (value) {
                           String pattern = r'^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$';
                           RegExp regExp = RegExp(pattern);
@@ -77,36 +79,45 @@ class Recoverpassword extends StatelessWidget {
                           labelText: 'Usuario',
                           icono: const Icon(
                             Icons.person,
-                            color: Color(0xFF416f9a), // Color secundario
+                            color: Color(0xFFEAE4F5), // Color secundario
                           ),
                         ),
+                        style: const TextStyle(color: Colors.white), // Estilo de texto blanco
                         validator: (value) {
-                          String pattern = r'^\d{3}-\d{6}-\d{4}[A-Z]$';
+                          // Expresión regular que permite letras, números y caracteres especiales
+                          String pattern = r'^[a-zA-Z0-9!@#$%^&*(),.?":{}|<>_\-=\+\[\]\\\/]+$';
                           RegExp regExp = RegExp(pattern);
 
                           if (value == null || value.isEmpty) {
                             return 'El campo no puede estar vacío.';
                           }
 
+                          // Validación de longitud máxima de 10 caracteres
+                          if (value.length > 10) {
+                            return 'El nombre de usuario debe tener como máximo 10 caracteres.';
+                          }
+
                           return regExp.hasMatch(value)
                               ? null
-                              : 'La cédula debe tener el formato XXX-XXXXXX-XXXXA';
+                              : 'Este campo puede contener letras, números o caracteres especiales.';
                         },
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.emailAddress, // Permitir entrada de correo
                         autocorrect: false,
                         decoration: InputDecorations.inputDecoration(
                           hintText: 'usuario@gmail.com',
                           labelText: 'Correo',
                           icono: const Icon(
-                            Icons.phone,
-                            color: Color(0xFF416f9a), // Color secundario
+                            Icons.email,
+                            color: Color(0xFFEAE4F5), // Color secundario
                           ),
                         ),
+                        style: const TextStyle(color: Colors.white), // Estilo de texto blanco
                         validator: (value) {
-                          String pattern = r'^\d{4}-\d{4}$';
+                          // Expresión regular para validar un correo electrónico
+                          String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                           RegExp regExp = RegExp(pattern);
 
                           if (value == null || value.isEmpty) {
@@ -114,24 +125,50 @@ class Recoverpassword extends StatelessWidget {
                           }
 
                           if (!regExp.hasMatch(value)) {
-                            if (value.contains(RegExp(r'[a-zA-Z]'))) {
-                              return 'No se permiten letras. Sigue el formato "1234-5678".';
-                            } else if (value.contains(RegExp(r'[^\d-]'))) {
-                              return 'Solo se permiten números y un guion en el formato 1234-5678.';
-                            } else {
-                              return 'Ingrese un número en el formato 1234-5678.';
-                            }
+                            return 'Ingrese un correo electrónico válido.';
                           }
+
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        keyboardType: TextInputType.text,  // Tipo de teclado para texto
+                        autocorrect: false,
+                        obscureText: true,  // Hacemos que el texto sea invisible mientras se escribe
+                        decoration: InputDecorations.inputDecoration(
+                          hintText: 'Ingresa tu nueva contraseña',
+                          labelText: 'Nueva Contraseña',
+                          icono: const Icon(
+                            Icons.lock,  // Ícono adecuado para contraseñas
+                            color: Color(0xFFEAE4F5), // Color secundario
+                          ),
+                        ),
+                        style: const TextStyle(color: Colors.white),  // Estilo de texto blanco
+                        validator: (value) {
+                          // Expresión regular para validar la contraseña
+                          String pattern = r'^[A-Za-z0-9]{8,20}$';
+                          RegExp regExp = RegExp(pattern);
+
+                          if (value == null || value.isEmpty) {
+                            return 'El campo no puede estar vacío.';
+                          }
+
+                          if (!regExp.hasMatch(value)) {
+                            return 'La contraseña debe tener entre 8 y 20 caracteres y solo puede contener letras y números.';
+                          }
+
                           return null;
                         },
                       ),
                       const SizedBox(height: 30),
+                      // Botón Enviar
                       MaterialButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                         disabledColor: const Color(0xFFDFE2E6),
-                        color: const Color(0xFF416f9a), // Color principal
+                        color: const Color(0xFF89c8e2), // Color principal
                         textColor: Colors.white,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -154,12 +191,12 @@ class Recoverpassword extends StatelessWidget {
   SafeArea animacionsms() {
     return SafeArea(
       child: Container(
-        margin: const EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 90),
         width: double.infinity,
         child: Lottie.asset(
           'assets/candado.json',
-          width: 150,
-          height: 150,
+          width: 180,
+          height: 180,
           fit: BoxFit.contain,
         ),
       ),
@@ -173,7 +210,6 @@ class Recoverpassword extends StatelessWidget {
           colors: [
             Color(0xFFEAE4F5),
             Color(0xFFCAAAF3),
-            
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

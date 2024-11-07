@@ -6,23 +6,18 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F6F6), // Fondo similar al de la imagen
-      appBar: AppBar(
-        title: const Text('Configuración'),
-        backgroundColor: const Color(0xFF89C8E2),
-        elevation: 0, // Eliminamos la sombra
-      ),
+      backgroundColor: const Color(0xFFEAE4F5), // Fondo similar al de la imagen
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: [
-            const SizedBox(height: 20),
-            // Imagen y datos del médico
+            const SizedBox(height: 50), // Mayor espacio en la parte superior
+            // Imagen y datos del usuario
             const Row(
               children: [
                 CircleAvatar(
                   radius: 45,
-                  backgroundImage: AssetImage('assets/dr.jpg'),
+                  backgroundImage: AssetImage('assets/qq.jpg'),
                 ),
                 SizedBox(width: 20),
                 Column(
@@ -32,11 +27,6 @@ class SettingsScreen extends StatelessWidget {
                       'Sebastian Jimenez',
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Especialista en Psicología',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                   ],
                 ),
@@ -74,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xFF89C8E2),
+            color: Color(0xFFCAAAF3),
           ),
           child: Icon(icon, color: Colors.white),
         ),
@@ -95,6 +85,7 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
+
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
@@ -102,8 +93,12 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Perfil'),
-        backgroundColor: const Color(0xFF89C8E2),
+        title: const Text(
+          'Editar Perfil',
+          style: TextStyle(color: Colors.white), // Color blanco en el título
+        ),
+        backgroundColor: const Color(0xFF4B227A),
+        iconTheme: const IconThemeData(color: Colors.white), // Color blanco en la flecha
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -111,21 +106,21 @@ class EditProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 40), // Añade un espacio superior
             const Center(
               child: Stack(
                 children: [
                   CircleAvatar(
                     radius: 70,
-                    backgroundImage: AssetImage('assets/dr.jpg'),
+                    backgroundImage: AssetImage('assets/qq.jpg'),
                   ),
-                  
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20), // Espacio adicional debajo de la imagen
             _buildTextField('Correo electrónico', 'sebasjimenez@gmail.com'),
             const SizedBox(height: 10),
-            _buildTextField('Numero de Celular ', '5487-9001'),
+            _buildTextField('Número de Celular', '5487-9001'),
             const SizedBox(height: 10),
             _buildTextField('Departamento', 'Managua'),
             const SizedBox(height: 10),
@@ -139,11 +134,11 @@ class EditProfileScreen extends StatelessWidget {
                 child: const Text(
                   'Guardar',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF89C8E2),
+                  backgroundColor: const Color(0xFF4B227A),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
@@ -180,3 +175,26 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 }
+
+  // Método para construir los campos de texto
+  Widget _buildTextField(String label, String placeholder) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 5),
+        TextField(
+          decoration: InputDecoration(
+            hintText: placeholder,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+

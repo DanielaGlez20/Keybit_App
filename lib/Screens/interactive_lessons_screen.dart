@@ -7,35 +7,75 @@ class InteractiveLessonsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Lecciones Interactivas"),
+        title: const Text(
+          "Lecciones Interactivas",
+          style: TextStyle(color: Colors.white), // Color blanco en el título
+        ),
         backgroundColor: const Color(0xFF4B227A),
+        iconTheme: const IconThemeData(color: Colors.white), // Color blanco en la flecha
       ),
       backgroundColor: const Color(0xFFEAE4F5),
-      body: ListView(
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
-        children: [
-          const Text(
-            'Selecciona una lección para comenzar:',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 20),
-          _buildLessonCard(context, 'Introducción a la Programación', 'Aprende los conceptos básicos de la programación.'),
-          _buildLessonCard(context, 'Estructuras de Datos', 'Explora cómo organizar y gestionar datos.'),
-          _buildLessonCard(context, 'Algoritmos', 'Entiende la lógica detrás de los algoritmos.'),
-          _buildLessonCard(context, 'Ciberseguridad', 'Descubre cómo proteger la información y sistemas.'),
-        ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido verticalmente
+          children: [
+            const SizedBox(height: 40), // Espacio adicional desde arriba
+            const SizedBox(height: 30), // Espacio entre el texto y los botones
+
+            // ListView con espacio entre las tarjetas
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildLessonCard(
+                    context,
+                    'Introducción a la Programación',
+                    'Aprende los conceptos básicos de la programación.',
+                  ),
+                  const SizedBox(height: 20), // Espacio entre las tarjetas
+                  _buildLessonCard(
+                    context,
+                    'Estructuras de Datos',
+                    'Explora cómo organizar y gestionar datos.',
+                  ),
+                  const SizedBox(height: 20), // Espacio entre las tarjetas
+                  _buildLessonCard(
+                    context,
+                    'Algoritmos',
+                    'Entiende la lógica detrás de los algoritmos.',
+                  ),
+                  const SizedBox(height: 20), // Espacio entre las tarjetas
+                  _buildLessonCard(
+                    context,
+                    'Ciberseguridad',
+                    'Descubre cómo proteger la información y sistemas.',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildLessonCard(BuildContext context, String title, String description) {
     return Card(
-      color: const Color(0xFF44416E),
+      color: const Color(0xFF44416E), // Color de fondo de la card
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
-        title: Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        subtitle: Text(description, style: const TextStyle(color: Colors.white70)),
-        trailing: const Icon(Icons.arrow_forward, color: Colors.white),
+        title: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white, // Color de texto
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(
+          description,
+          style: const TextStyle(color: Colors.white70), // Color de subtítulo
+        ),
+        trailing: const Icon(Icons.arrow_forward, color: Colors.white), // Icono en el botón
         onTap: () {
           Navigator.push(
             context,
@@ -57,14 +97,21 @@ class LessonDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white), // Color blanco en el título
+        ),
         backgroundColor: const Color(0xFF4B227A),
+        iconTheme: const IconThemeData(color: Colors.white), // Color blanco en la flecha
       ),
       backgroundColor: const Color(0xFFEAE4F5),
       body: Center(
         child: Text(
           'Contenido interactivo de $title aquí',
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(
+            fontSize: 18,
+            color: Color(0xFF44416E), // Color del texto
+          ),
         ),
       ),
     );

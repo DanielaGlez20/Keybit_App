@@ -25,30 +25,25 @@ class _PerfilScreenState extends State<PerfilScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFffffff),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFffffff),
-        // Eliminamos el leading que contiene la flecha de retroceso
-        actions: const [
-          SizedBox(width: 16),
-        ],
-      ),
+      backgroundColor: const Color(0xFFEAE4F5),
       body: SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0).copyWith(bottom: 50), // Aumentamos el padding en la parte inferior
+        padding: const EdgeInsets.symmetric(horizontal: 16.0).copyWith(bottom: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Añade un espacio en la parte superior
+            const SizedBox(height: 40), // Ajusta la altura según lo que necesites
+
             // Imagen de perfil con ícono de edición
             Center(
               child: Stack(
                 children: [
-                  // Cuadro para resaltar la imagen de perfil
                   Container(
                     padding: const EdgeInsets.all(4), // Espacio interno para el borde
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: const Color(0xFF89c8e2), // Color del borde
+                        color: const Color(0xFFCAAAF3), // Color del borde
                         width: 4, // Grosor del borde
                       ),
                     ),
@@ -56,10 +51,9 @@ class _PerfilScreenState extends State<PerfilScreen> {
                       radius: 100,
                       backgroundImage: _image != null
                           ? FileImage(File(_image!.path))
-                          : const AssetImage('assets/dr.jpg') as ImageProvider,
+                          : const AssetImage('assets/qq.jpg') as ImageProvider,
                     ),
                   ),
-                  // Ícono de ca para cambiar la imagen de perfil
                   Positioned(
                     bottom: 10,
                     right: 10,
@@ -69,7 +63,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                         padding: const EdgeInsets.all(9),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFF89c8e2), // Fondo del ícono de lápiz
+                          color: Color(0xFFCAAAF3), // Fondo del ícono de cámara
                         ),
                         child: const Icon(
                           Icons.camera_alt,
@@ -84,7 +78,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
             ),
             const SizedBox(height: 20),
             const Text(
-              'Dr. Sebastian Jimenez',
+              'Sebastian Jimenez',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -92,35 +86,21 @@ class _PerfilScreenState extends State<PerfilScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Especialista en Psicología',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey,
-              ),
-            ),
             const SizedBox(height: 40),
 
             // Información con íconos de lápiz para editar
             buildEditableInfoContainer(
               context,
               'Acerca de mí',
-              'Especialista en psicología con más de 10 años de experiencia...',
+              'Estudiante de Técnico en Computación',
               'acercaDe',
             ),
             const SizedBox(height: 15),
             buildEditableInfoContainer(
               context,
               'Formación Académica',
-              '• Licenciatura en Psicología - UNAN Managua\n• Maestría en Psicoterapia Cognitivo-Conductual...',
+              '• Bachiller\n• Estudiante de Técnico en Computacion',
               'formacion',
-            ),
-            const SizedBox(height: 15),
-            buildEditableInfoContainer(
-              context,
-              'Filosofía de Trabajo',
-              'Acompañar a mis pacientes en su proceso de sanación...',
-              'filosofia',
             ),
             const SizedBox(height: 15),
             buildEditableInfoContainer(
@@ -139,11 +119,11 @@ class _PerfilScreenState extends State<PerfilScreen> {
     return Container(
       padding: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        color: Color(0xFFffffff),
+        color: Color(0xFFEAE4F5),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Color(0xFF416f9a).withOpacity(0.3),
+            color: Color(0xFFCAAAF3).withOpacity(0.9),
             blurRadius: 15,
             offset: const Offset(0, 4),
           ),
@@ -173,7 +153,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.edit, color: Color(0xFF416f9a)),
+            icon: const Icon(Icons.edit, color: Color(0xFFCAAAF3)),
             onPressed: () {
               Navigator.push(
                 context,
