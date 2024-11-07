@@ -21,11 +21,12 @@ class _HomeKeybitState extends State<HomeKeybit> {
   final String profilePicture = 'assets/qq.jpg';
 
   List<Map<String, dynamic>> access = [
-    {"icon": FontAwesomeIcons.bookOpen, "acceso": "Lecciones Interactivas"},
-    {"icon": FontAwesomeIcons.pencilAlt, "acceso": "Ejercicios Prácticos"},
+    {"icon": FontAwesomeIcons.cameraRotate, "acceso": "Modo AR"},
+    {"icon": FontAwesomeIcons.search, "acceso": "Deteccion de Objetos"},
     {"icon": FontAwesomeIcons.chalkboardTeacher, "acceso": "Evaluaciones"},
-    {"icon": FontAwesomeIcons.commentDots, "acceso": "ChatBot"},
+    {"icon": FontAwesomeIcons.commentDots, "acceso": "KeybitBot"},
     {"icon": FontAwesomeIcons.gamepad, "acceso": "Minijuegos"},
+    {"icon": FontAwesomeIcons.bookOpen, "acceso": "Lecciones Interactivas"},
   ];
 
   int _intpage = 0;
@@ -35,6 +36,7 @@ class _HomeKeybitState extends State<HomeKeybit> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF4B227A),
+        toolbarHeight: 20, // Ajusta la altura del AppBar
       ),
       backgroundColor: const Color(0xFFEAE4F5),
       bottomNavigationBar: CurvedNavigationBar(
@@ -60,137 +62,167 @@ class _HomeKeybitState extends State<HomeKeybit> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    // Contenedor que ocupa toda la pantalla a lo ancho
+                    // Contenedor para la bienvenida y foto de perfil
                     Container(
-                      width: double.infinity, // Ocupa todo el ancho
-                      height: 100, // Ajusta la altura según tus necesidades
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF4B227A), Color(0xFFCAAAF3)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(70),
+                          bottomRight: Radius.circular(70),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF4B227A).withOpacity(0.9),
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                          ),
+                        ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.all(20), // Padding interno
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Bienvenido, $userName',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF44416E),
-                                  ),
+                          // Foto de perfil centrada con borde y sombra
+                          ClipOval(
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 3,
                                 ),
-                              ],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.purple.withOpacity(0.3),
+                                    blurRadius: 10,
+                                    spreadRadius: 3,
+                                  ),
+                                ],
+                                shape: BoxShape.circle,
+                              ),
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage: AssetImage(profilePicture),
+                              ),
                             ),
                           ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.all(20), // Padding interno
-                            child: CircleAvatar(
-                              radius: 25,
-                              backgroundImage: AssetImage(profilePicture),
+                          const SizedBox(height: 5),
+                          // Nombre de usuario con mayor tamaño
+                          Text(
+                            'Bienvenido, $userName',
+                            style: const TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFEAE4F5),
                             ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 70),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.5,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemCount: access.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            switch (access[index]['acceso']) {
-                              case 'Lecciones Interactivas':
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const InteractiveLessonsScreen(),
-                                  ),
-                                );
-                                break;
-                              case 'Ejercicios Prácticos':
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ExercisesScreen(),
-                                  ),
-                                );
-                                break;
-                              case 'Evaluaciones':
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RealTimeAssessmentsScreen(),
-                                  ),
-                                );
-                                break;
-                              case 'ChatBot':
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const InstantFeedbackScreen(),
-                                  ),
-                                );
-                                break;
-                              case 'Minijuegos':
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MinigamesScreen(),
-                                  ),
-                                );
-                                break;
-                            }
-                          },
-                          child: Card(
-                            color: const Color(0xFF4B227A),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    access[index]["icon"],
-                                    color: const Color(0xFFEAE4F5),
-                                    size: 30,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    access[index]["acceso"],
-                                    style: const TextStyle(
-                                      color: Color(0xFFEAE4F5),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                    // Contenedor para los accesos
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.3,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                        ),
+                        itemCount: access.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              switch (access[index]['acceso']) {
+                                case 'Lecciones Interactivas':
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const InteractiveLessonsScreen(),
                                     ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                                  );
+                                  break;
+                                case 'Modo AR':
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ExercisesScreen(),
+                                    ),
+                                  );
+                                  break;
+                                case 'Evaluaciones':
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RealTimeAssessmentsScreen(),
+                                    ),
+                                  );
+                                  break;
+                                case 'KeybitBot':
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const InstantFeedbackScreen(),
+                                    ),
+                                  );
+                                  break;
+                                case 'Minijuegos':
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MinigamesScreen(),
+                                    ),
+                                  );
+                                  break;
+                              }
+                            },
+                            child: Card(
+                              color: const Color(0xFFCAAAF3),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              elevation: 8,
+                              child: Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      access[index]["icon"],
+                                      color: const Color(0xFFEAE4F5),
+                                      size: 30,
+                                    ),
+                                    const SizedBox(height: 15),
+                                    Text(
+                                      access[index]["acceso"],
+                                      style: const TextStyle(
+                                        color: Color(0xFFEAE4F5),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
